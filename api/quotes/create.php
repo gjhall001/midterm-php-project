@@ -42,6 +42,6 @@
             "quote" => quoteObj->qoute,
             "author_id" => quoteObj->author,
             "category_id" => quoteObj->category
-        )
+        );
         echo json_encode($quote_arr);
     }
