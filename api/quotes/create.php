@@ -34,8 +34,14 @@
     
     $quoteObj->quote = $data->quote;
     $quoteObj->author = $data->author_id;
-    $quoteObj->category = $data->category_id;    
+    $quoteObj->category = $data->category_id; 
 
     if ($quoteObj->create()) {
-        echo json_encode($quoteObj);
+        $quote_arr = array(
+            "id" => quoteObj->id,
+            "quote" => quoteObj->qoute,
+            "author_id" => quoteObj->author,
+            "category_id" => quoteObj->category
+        )
+        echo json_encode($quote_arr);
     }

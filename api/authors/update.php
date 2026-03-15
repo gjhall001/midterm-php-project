@@ -15,33 +15,50 @@
     $authorObj = new Author($db);
 
     // Get raw author data
-    $data = json_decode(file_get_contents("php://input"));  
+    $data = json_decode(file_get_contents("php://input"));
     
-    if (isset($data->id) && isset($data->author)) {
-        $authorObj->id = $data->id;
-        $authorObj->author = $data->author;
-
-        if ($authorObj->update()) {
-            echo json_encode($authorObj);
-        } else {
-            echo json_encode(array("message" => "author_id Not Found"));
-            exit();
-        }      
-    } elseif (isset($data->id) && !isset($data->author)) {
-        $authorObj->id = $data->id;
-        $isSet = $authorObj->update();
-        if ($isSet) {
-            echo json_encode(array("message" => "Missing Required Parameters"));
-            exit();
-        } else {
-            echo json_encode(array("message" => "author_id Not Found"));
-            exit();            
-        }
-    } elseif (!isset($data->id) && isset($data->author)) {
-        $authorObj->author = $data->author;
+    if (!isset($data->id) || !isset($data->author)) {
         echo json_encode(array("message" => "Missing Required Parameters"));
-        exit();
-    } elseif (!isset($data->id) && !isset($data->author)) {
-        echo json_encode(array("message" => "Missing Required Parameters"));
-        exit();
+        exit();       
     }
+
+    if (!authorExists($data->id)) {
+        echo json_encode(array("message" => "author_id Not Found"));
+        exit();        
+    }
+
+    $authorObj->id = $data->id;
+    $authorObj->author = $data->author;    
+
+    if ($authorObj->update){
+        echo json_encode($authorObj);
+    }
+
+    // if (isset($data->id) && isset($data->author)) {
+    //     $authorObj->id = $data->id;
+    //     $authorObj->author = $data->author;
+
+    //     if ($authorObj->update()) {
+    //         echo json_encode($authorObj);
+    //     } else {
+    //         echo json_encode(array("message" => "author_id Not Found"));
+    //         exit();
+    //     }      
+    // } elseif (isset($data->id) && !isset($data->author)) {
+    //     $authorObj->id = $data->id;
+    //     $isSet = $authorObj->update();
+    //     if ($isSet) {
+    //         echo json_encode(array("message" => "Missing Required Parameters"));
+    //         exit();
+    //     } else {
+    //         echo json_encode(array("message" => "author_id Not Found"));
+    //         exit();            
+    //     }
+    // } elseif (!isset($data->id) && isset($data->author)) {
+    //     $authorObj->author = $data->author;
+    //     echo json_encode(array("message" => "Missing Required Parameters"));
+    //     exit();
+    // } elseif (!isset($data->id) && !isset($data->author)) {
+    //     echo json_encode(array("message" => "Missing Required Parameters"));
+    //     exit();
+    // }

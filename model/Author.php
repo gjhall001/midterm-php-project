@@ -133,4 +133,21 @@
             printf("Error: %s\n", $stmt->error);
             return false;            
         }
+
+        // Helper function to determine if author exists in the database
+        public function authorExists($id) {
+            $query = "SELECT 1 FROM {$this->table}
+                WHERE id = :id LIMIT 1";
+            
+            // Prepare statement
+            $stmt = $this->conn->prepare($query);
+
+            // Bind data
+            $stmt->bindParam(":id", $id);
+
+            // Execute Statement
+            $stmt->execute();
+
+            return $stmt->rowCount() > 0;
+        }        
     }
