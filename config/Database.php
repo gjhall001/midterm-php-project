@@ -10,7 +10,7 @@
         // Constructor
         public function __construct() {
             $this->host = getenv("HOST");
-            $this->port = getenv("PORT");
+            $this->port = getenv("DBPORT");
             $this->username = getenv("USERNAME");
             $this->password = getenv("PASSWORD");
             $this->dbname = getenv("DBNAME");
