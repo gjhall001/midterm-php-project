@@ -30,7 +30,7 @@
     $categoryObj->id = $data->id;
     $categoryObj->category = $data->category;    
 
-    if ($categoryObj->update){
+    if ($categoryObj->update()){
         echo json_encode($categoryObj);
     }    
     

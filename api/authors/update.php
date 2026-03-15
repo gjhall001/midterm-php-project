@@ -30,7 +30,7 @@
     $authorObj->id = $data->id;
     $authorObj->author = $data->author;    
 
-    if ($authorObj->update){
+    if ($authorObj->update()){
         echo json_encode($authorObj);
     }
 
