@@ -22,7 +22,7 @@
         exit();       
     }
 
-    if (!authorObj->authorExists($data->id)) {
+    if (!$authorObj->authorExists($data->id)) {
         echo json_encode(array("message" => "author_id Not Found"));
         exit();        
     }

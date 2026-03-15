@@ -38,10 +38,10 @@
 
     if ($quoteObj->create()) {
         $quote_arr = array(
-            "id" => quoteObj->id,
-            "quote" => quoteObj->qoute,
-            "author_id" => quoteObj->author,
-            "category_id" => quoteObj->category
+            "id" => $quoteObj->id,
+            "quote" => $quoteObj->quote,
+            "author_id" => $quoteObj->author,
+            "category_id" => $quoteObj->category
         );
         echo json_encode($quote_arr);
     }
